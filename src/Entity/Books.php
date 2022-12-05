@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\BooksRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: BooksRepository::class)]
 class Books
@@ -14,15 +16,25 @@ class Books
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Length(min:2, max : 100)]
     private ?string $name = null;
 
+    
+
+
     #[ORM\Column]
+    #[Assert\Positive()]
+    #[Assert\LessThan(10)]
+
     private ?float $price = null;
 
     #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100)]
+    #[Assert\Length(min:2, max : 100)]
     private ?string $name_author = null;
 
     #[ORM\Column]
+#[Assert\NotBlank()]
     private ?\DateTimeImmutable $publishedAt = null;
 
     public function getId(): ?int
